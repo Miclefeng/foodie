@@ -4,6 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
+<<<<<<< HEAD
     <groupId>miclefeng</groupId>
     <artifactId>foodie</artifactId>
     <packaging>pom</packaging>
@@ -32,4 +33,11 @@
             </plugin>
         </plugins>
     </build>
+=======
+    <groupId>org.example</groupId>
+    <artifactId>foodie</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+
+>>>>>>> 505dc856c757d129e739a9f6881a0b71143ef25c
 </project>
