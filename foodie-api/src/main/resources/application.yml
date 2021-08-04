@@ -18,26 +18,46 @@ server:
 spring:
   application:
     name: foodie
-  profiles:
-    active: prod  # 配置开发环境
-  transaction:
-    rollback-on-commit-failure: true
-  devtools:
-    restart:
-      enabled: false
-  aop:
-    proxy-target-class: true
-
-  # 出现错误时, 直接抛出异常(便于异常统一处理，否则捕获不到404)
-  mvc:
-    throw-exception-if-no-handler-found: true
-  resources:
-    add-mappings: false
-
+  #  profiles:
+  #    active: prod  # 配置开发环境
+  #  transaction:
+  #    rollback-on-commit-failure: true
+  #  devtools:
+  #    restart:
+  #      enabled: false
+  #  aop:
+  #    proxy-target-class: true
+  #
+  #  # 出现错误时, 直接抛出异常(便于异常统一处理，否则捕获不到404)
+  #  mvc:
+  #    throw-exception-if-no-handler-found: true
+  #  resources:
+  #    add-mappings: false
   servlet:
     multipart:
       max-file-size: 10MB
       max-request-size: 100MB
+
+  ############################################################
+  #
+  # 配置数据源信息
+  #
+  ############################################################
+  datasource:                                           # 数据源的相关配置
+    type: com.zaxxer.hikari.HikariDataSource          # 数据源类型：HikariCP
+    driver-class-name: com.mysql.cj.jdbc.Driver          # mysql驱动
+    url: jdbc:mysql://127.0.0.1:3306/foodie?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: zss25456585
+    hikari:
+      connection-timeout: 30000       # 等待连接池分配连接的最大时长（毫秒），超过这个时长还没可用的连接则发生SQLException， 默认:30秒
+      minimum-idle: 5                 # 最小连接数
+      maximum-pool-size: 20           # 最大连接数
+      auto-commit: true               # 自动提交
+      idle-timeout: 600000            # 连接超时的最大时长（毫秒），超时则被释放（retired），默认:10分钟
+      pool-name: DateSourceHikariCP     # 连接池名字
+      max-lifetime: 1800000           # 连接的生命时长（毫秒），超时而且没被使用则被释放（retired），默认:30分钟 1800000ms
+      connection-test-query: SELECT 1
 
 
 ############################################################
@@ -54,8 +74,8 @@ mybatis:
 # mybatis mapper 配置
 #
 ############################################################
-# 通用 Mapper 配置
+# 通用 Mapper 配置 mapper统一接口，后面所有的mapper类都会继承这个接口
 mapper:
-  mappers: com.imooc.my.mapper.MyMapper
+  mappers: com.miclefeng.my.mapper.MyMapper
   not-empty: false
   identity: MYSQL
