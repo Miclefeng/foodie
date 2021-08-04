@@ -1,6 +1,7 @@
 package com.test;
 
 import com.miclefeng.controller.HelloController;
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 /**
@@ -29,7 +31,8 @@ public class HelloTest {
     @Test
     public void getHello() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post("/hello?name=Imooc")
-                .accept(MediaType.APPLICATION_JSON_UTF8)).andDo(print());
+                .accept(MediaType.APPLICATION_JSON_UTF8))/*.andDo(print())*/
+                .andExpect(MockMvcResultMatchers.content().string(Matchers.containsString("Imooc")));
     }
 }
 
